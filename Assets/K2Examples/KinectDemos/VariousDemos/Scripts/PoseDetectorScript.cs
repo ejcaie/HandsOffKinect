@@ -10,6 +10,7 @@ public class PoseDetectorScript : MonoBehaviour
 
     [Tooltip("Model in pose that need to be reached by the user.")]
     public PoseModelHelper poseModel;
+    //public PoseModelHelper poseModel1;
 
     [Tooltip("List of joints to compare.")]
     public List<KinectInterop.JointType> poseJoints = new List<KinectInterop.JointType>();

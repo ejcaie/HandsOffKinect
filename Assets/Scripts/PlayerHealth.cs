@@ -38,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
                 break;
             case PlayerState.idle:
                 savedPose = 0;
-                print(playerID + "idle");
+                //print(playerID + "idle");
                 break;
             case PlayerState.checkPose:
                 CheckPose();
