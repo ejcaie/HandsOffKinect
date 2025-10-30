@@ -34,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
         {
             case PlayerState.dead:
                 roundManager.EndRound();
+                SendMessage("Dead");
                 print(playerID + "dead");
                 break;
             case PlayerState.idle:

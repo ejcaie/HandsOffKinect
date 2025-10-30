@@ -15,24 +15,39 @@ public class RoundManager : MonoBehaviour
 
     void StartRound()
     {
-        //player1Manager.currentState
+        //player1Manager.currentState.idle
         //player2Manager.switch(currentState).idle;
-        RoundUpdate();
+        //RoundUpdate();
+    }
+
+    void Update()
+    {
+        timer.value = timer.value - 1 * Time.deltaTime;
     }
 
     void RoundUpdate()
     {
-        if (timer.value > 0)
-        {
-            timer.value = timer.value - 1 * Time.deltaTime;
-            RoundUpdate();
-        }
-        else EndRound();
+
     }
 
     public void EndRound()
     {
         print("its so over");
+
+        if (player1Manager.currentHealth < 0 || player2Manager.currentHealth < 0)
+        {
+            Results();
+        }
+        else
+        {
+            //if both players ready up
+            //StartRound();
+        }
+    }
+
+    public void Results()
+    {
+
     }
 
 }
