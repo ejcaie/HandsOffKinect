@@ -12,11 +12,11 @@ public class RoundManager : MonoBehaviour
 
     void StartRound()
     {
-        player1Manager.switch(currentState).idle;
-        player2Manager.switch(currentState).idle;
+        //player1Manager.currentState
+        //player2Manager.switch(currentState).idle;
     }
 
-    void EndRound()
+    public void EndRound()
     {
 
     }

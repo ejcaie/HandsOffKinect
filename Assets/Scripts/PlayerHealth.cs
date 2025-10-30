@@ -34,40 +34,40 @@ public class PlayerHealth : MonoBehaviour
         {
             case PlayerState.dead:
                 roundManager.EndRound();
-                print(playerID "dead");
+                print(playerID + "dead");
                 break;
             case PlayerState.idle:
                 savedPose = 0;
-                print(playerID "idle");
+                print(playerID + "idle");
                 break;
             case PlayerState.checkPose:
                 CheckPose();
-                print(playerID "checking");
+                print(playerID + "checking");
                 break;
             case PlayerState.pose1:
                 savedPose = 1;
                 CheckPose();
-                print(playerID "light");
+                print(playerID + "light");
                 break;
             case PlayerState.pose2:
                 savedPose = 2;
                 CheckPose();
-                print(playerID "medium");
+                print(playerID + "medium");
                 break;
             case PlayerState.pose3:
                 savedPose = 3;
                 CheckPose();
-                print(playerID "heavy");
+                print(playerID + "heavy");
                 break;
             case PlayerState.pose4:
                 savedPose = 4;
                 CheckPose();
-                print(playerID "heal");
+                print(playerID + "heal");
                 break;
             case PlayerState.pose5:
                 savedPose = 5;
                 CheckPose();
-                print(playerID "block")
+                print(playerID + "block");
                 break;
         }
 
