@@ -6,8 +6,11 @@ public class PoseListScript : MonoBehaviour
 {
     public PoseModelHelper[] poseList;
     public PoseModelHelper avataroneModel;
+    public PoseModelHelper avatartwoModel;
+    string player1 = "player one";
+    string player2 = "player two";
     public string[] poseNames;
-    public float matchThreshold = 0.01f;
+    public float matchThreshold = 0.7f;
 
     // whether the pose is matched or not
     private bool bPoseMatched = false;
@@ -48,8 +51,7 @@ public class PoseListScript : MonoBehaviour
             // save model rotation
             Quaternion poseSavedRotation = poseModel.GetBoneTransform(0).rotation;
             poseModel.GetBoneTransform(0).rotation = avataroneModel.GetBoneTransform(0).rotation;
-
-            pose.avBoneDirs = new Vector3[poseJoints.Count];
+            poseModel.GetBoneTransform(0).rotation = avatartwoModel.GetBoneTransform(0).rotation;
 
             print("joints" + poseJoints.Count);
             for (int i = 0; i < poseJoints.Count; i++)
@@ -79,10 +81,12 @@ public class PoseListScript : MonoBehaviour
     void Update()
     {
         PoseModelData playeronePose = new PoseModelData();
-        
+        PoseModelData playertwoPose = new PoseModelData();
         
         GetAvatarPose(Time.time, false, playeronePose, avataroneModel);
-        GetPoseDifference(false, playeronePose);
+        GetAvatarPose(Time.time, false, playertwoPose, avatartwoModel);
+        GetPoseDifference(false, playeronePose,player1);
+        GetPoseDifference(false, playertwoPose,player2);
     }
 
     private void GetAvatarPose(float fCurrentTime, bool isMirrored, PoseModelData poseAvatar, PoseModelHelper avatarModel)
@@ -114,11 +118,11 @@ public class PoseListScript : MonoBehaviour
             }
         }
     }
-    private void GetPoseDifference(bool isMirrored, PoseModelData poseAvatar)
+    private void GetPoseDifference(bool isMirrored, PoseModelData poseAvatar, string playerName)
     {
         // by-default values
         bPoseMatched = false;
-        fMatchPercent = 0f;
+        fMatchPercent = 0.7f;
         fMatchPoseTime = 0f;
 
         KinectManager kinectManager = KinectManager.Instance;
@@ -145,14 +149,16 @@ public class PoseListScript : MonoBehaviour
                 fMaxDiff += 90f;  // we assume the max diff could be 90 degrees
             }
 
-            float fPoseMatch = fMaxDiff > 0f ? (1f - fAngleDiff / fMaxDiff) : 0f;
-            if (fPoseMatch > fMatchPercent)
+            float PlayerOnefPoseMatch = fMaxDiff > 0f ? (1f - fAngleDiff / fMaxDiff) : 0f;
+            //float PlayerTwofPoseMatch = fMaxDiff > 0f ? (1f - fAngleDiff / fMaxDiff) : 0f;
+            if (PlayerOnefPoseMatch > fMatchPercent)
             {
-                Debug.Log("pose is " + poseNames[p]);
-                fMatchPercent = fPoseMatch;
+                Debug.Log(playerName + "pose is " + poseNames[p] + PlayerOnefPoseMatch);
+                fMatchPercent = PlayerOnefPoseMatch;
                 fMatchPoseTime = poseModel.fTime;
                 bPoseMatched = (fMatchPercent >= matchThreshold);
             }
+
         }
     }
 }
