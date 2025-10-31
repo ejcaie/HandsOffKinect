@@ -6,11 +6,14 @@ public class PlayerVisuals : MonoBehaviour
     public SpriteRenderer bodyRenderer;
     public PlayerHealth playerController;
 
-    private readonly int IdleHash = Animator.StringToHash("Idle");
-    private readonly int WalkingHash = Animator.StringToHash("Walking");
-    private readonly int JumpingHash = Animator.StringToHash("Jumping");
-    private readonly int DeadHash = Animator.StringToHash("Dead");
-    private readonly int DashHash = Animator.StringToHash("Dash");
+    private readonly int IdleHash = Animator.StringToHash("idle");
+    private readonly int ReadyUpHash = Animator.StringToHash("readyUp");
+    private readonly int LightHash = Animator.StringToHash("light");
+    private readonly int MediumHash = Animator.StringToHash("medium");
+    private readonly int HeavyHash = Animator.StringToHash("heavy");
+    private readonly int BlockHash = Animator.StringToHash("block");
+    private readonly int CounterHash = Animator.StringToHash("counter");
+    private readonly int DeadHash = Animator.StringToHash("dead");
 
     void Update()
     {
@@ -27,25 +30,25 @@ public class PlayerVisuals : MonoBehaviour
                     animator.CrossFade(IdleHash, 0);
                     break;
                 case PlayerState.readyUp:
-                    animator.CrossFade(WalkingHash, 0);
+                    animator.CrossFade(ReadyUpHash, 0);
                     break;
                 case PlayerState.light:
-                    animator.CrossFade(JumpingHash, 0);
+                    animator.CrossFade(LightHash, 0);
                     break;
                 case PlayerState.medium:
-                    animator.CrossFade(DeadHash, 0);
+                    animator.CrossFade(MediumHash, 0);
                     break;
                 case PlayerState.heavy:
-                    animator.CrossFade(DashHash, 0);
+                    animator.CrossFade(HeavyHash, 0);
                     break;
                 case PlayerState.block:
-                    animator.CrossFade(DashHash, 0);
+                    animator.CrossFade(BlockHash, 0);
                     break;
                 case PlayerState.counter:
-                    animator.CrossFade(DashHash, 0);
+                    animator.CrossFade(CounterHash, 0);
                     break;
                 case PlayerState.dead:
-                    animator.CrossFade(DashHash, 0);
+                    animator.CrossFade(DeadHash, 0);
                     break;
             }
         }

@@ -5,6 +5,8 @@ using static PoseDetectorScript;
 public class PoseListScript : MonoBehaviour
 {
     public RoundManager roundManager;
+    public PlayerHealth player1Manager;
+    public PlayerHealth player2Manager;
 
     public PoseModelHelper[] poseList;
     public PoseModelHelper avataroneModel;
@@ -154,6 +156,24 @@ public class PoseListScript : MonoBehaviour
             if (PlayerOnefPoseMatch > fMatchPercent)
             {
                 Debug.Log(playerName + "pose is " + poseNames[p] + PlayerOnefPoseMatch);
+                if (playerName == "player one")
+                {
+                    if (p == 0) player1Manager.readyUpPose = true;
+                    else if (p == 1) player1Manager.lightPose = true;
+                    else if (p == 2) player1Manager.mediumPose = true;
+                    else if (p == 3) player1Manager.heavyPose = true;
+                    else if (p == 4) player1Manager.blockPose = true;
+                    else if (p == 5) player1Manager.counterPose = true;
+                }
+                if (playerName == "player two")
+                {
+                    if (p == 0) player2Manager.readyUpPose = true;
+                    else if (p == 1) player2Manager.lightPose = true;
+                    else if (p == 2) player2Manager.mediumPose = true;
+                    else if (p == 3) player2Manager.heavyPose = true;
+                    else if (p == 4) player2Manager.blockPose = true;
+                    else if (p == 5) player2Manager.counterPose = true;
+                }
                 fMatchPercent = PlayerOnefPoseMatch;
                 fMatchPoseTime = poseModel.fTime;
                 bPoseMatched = (fMatchPercent >= matchThreshold);
