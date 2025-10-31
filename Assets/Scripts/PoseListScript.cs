@@ -4,6 +4,8 @@ using static PoseDetectorScript;
 
 public class PoseListScript : MonoBehaviour
 {
+    public RoundManager roundManager;
+
     public PoseModelHelper[] poseList;
     public PoseModelHelper avataroneModel;
     public PoseModelHelper avatartwoModel;
@@ -41,7 +43,6 @@ public class PoseListScript : MonoBehaviour
         //    return;
         for (int j = 0; j < poseList.Length; j++)
         {
-            print("it work");
             PoseModelHelper poseModel;
             poseModel = poseList[j];
             PoseModelData pose = new PoseModelData();
@@ -53,7 +54,6 @@ public class PoseListScript : MonoBehaviour
             poseModel.GetBoneTransform(0).rotation = avataroneModel.GetBoneTransform(0).rotation;
             poseModel.GetBoneTransform(0).rotation = avatartwoModel.GetBoneTransform(0).rotation;
 
-            print("joints" + poseJoints.Count);
             for (int i = 0; i < poseJoints.Count; i++)
             {
                 KinectInterop.JointType joint = poseJoints[i];
