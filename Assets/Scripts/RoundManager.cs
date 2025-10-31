@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,35 +8,40 @@ public class RoundManager : MonoBehaviour
     public PlayerHealth player2Manager;
     public Slider timer;
 
+    private bool clockRunning = false;
+
     void Start()
     {
         timer.value = 5f;
-        StartRound();
+        ReadyUp();
     }
 
-    void StartRound()
+    void ReadyUp()
     {
-        //player1Manager.currentState.idle
-        //player2Manager.switch(currentState).idle;
-        //RoundUpdate();
+        player1Manager.currentState = PlayerState.idle;
+        player2Manager.currentState = PlayerState.idle;
+
+        if (player1Manager.currentState == PlayerState.readyUp && player2Manager.currentState == PlayerState.readyUp)
+        {
+            clockRunning = true;
+        }
+
+        return;
     }
 
     void Update()
     {
-        timer.value = timer.value - 1 * Time.deltaTime;
-    }
+        if (clockRunning) timer.value = timer.value - 1 * Time.deltaTime;
 
-    void RoundUpdate()
-    {
-
+        if (timer.value < 0) EndRound();
     }
 
     public void EndRound()
     {
-        print("its so over");
-
         if (player1Manager.currentHealth < 0 || player2Manager.currentHealth < 0)
         {
+            print("we done");
+            clockRunning = false;
             Results();
         }
         else

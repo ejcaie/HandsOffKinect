@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public enum PlayerState 
     {
-        idle, checkPose, pose1, pose2, pose3, pose4, pose5, dead
+        idle, readyUp, light, medium, heavy, block, counter, dead
     }
 
 public class PlayerHealth : MonoBehaviour
@@ -19,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
     public int totalHealth;
     public int currentHealth;
     public PlayerState currentState;
+    public PlayerState previousState;
     public Slider healthBar;
 
     void Start()
@@ -30,45 +31,32 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        previousState = currentState;
+
         switch(currentState)
         {
             case PlayerState.dead:
-                roundManager.EndRound();
-                SendMessage("Dead");
-                print(playerID + "dead");
                 break;
             case PlayerState.idle:
                 savedPose = 0;
-                //print(playerID + "idle");
                 break;
-            case PlayerState.checkPose:
-                CheckPose();
-                print(playerID + "checking");
+            case PlayerState.readyUp:
+                SavePose();
                 break;
-            case PlayerState.pose1:
+            case PlayerState.light:
                 savedPose = 1;
-                CheckPose();
-                print(playerID + "light");
                 break;
-            case PlayerState.pose2:
+            case PlayerState.medium:
                 savedPose = 2;
-                CheckPose();
-                print(playerID + "medium");
                 break;
-            case PlayerState.pose3:
+            case PlayerState.heavy:
                 savedPose = 3;
-                CheckPose();
-                print(playerID + "heavy");
                 break;
-            case PlayerState.pose4:
+            case PlayerState.block:
                 savedPose = 4;
-                CheckPose();
-                print(playerID + "heal");
                 break;
-            case PlayerState.pose5:
+            case PlayerState.counter:
                 savedPose = 5;
-                CheckPose();
-                print(playerID + "block");
                 break;
         }
 
@@ -124,7 +112,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void CheckPose()
+    void SavePose()
     {
 
     }
